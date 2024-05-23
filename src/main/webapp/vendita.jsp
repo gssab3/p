@@ -40,7 +40,7 @@
 				<div class="input-box">
 					<span class="details">Immagine</span>
   					<input type="file" id="immagine" name="immagine" accept="image/png, image/gif, image/jpeg" required>
-				</div> 
+				</div>  
 				<div class="input-box">
 					<span class="details">Tipologia</span>
   					<select id="tipologia" name="tipologia" required>
