@@ -127,34 +127,37 @@ public class ProductModel {
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
+			if((where.equals("Arredamento Casa")) || (where.equals("Gadget")) || (where.equals("Action Figures"))) 
+			{
+				ResultSet rs = preparedStatement.executeQuery();
 
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				ProductBean bean = new ProductBean();
-				
-				int codiceProdotto = rs.getInt("codice");
-				bean.setCodice(codiceProdotto);
-				bean.setNome(rs.getString("nome"));
-				bean.setDescrizione(rs.getString("descrizione"));
-				bean.setPrezzo(rs.getDouble("prezzo"));
-				bean.setSpedizione(rs.getDouble("speseSpedizione"));
-				bean.setEmail(rs.getString("emailVenditore"));
-				bean.setTag(rs.getString("tag"));
-				bean.setTipologia(rs.getString("nomeTipologia"));
-				bean.setData(rs.getDate("dataAnnuncio"));
-				bean.setImmagine(rs.getString("model"));
-				
-				connection2 = DriverManagerConnectionPool.getConnection();
-				preparedStatement2 = connection2.prepareStatement(sql2);
-				preparedStatement2.setInt(1, codiceProdotto);
-				ResultSet rs2 = preparedStatement2.executeQuery();
-				if (rs2.next()) {
-					bean.setVotazione(rs2.getDouble(1));
+				while (rs.next()) {
+					ProductBean bean = new ProductBean();
+					
+					int codiceProdotto = rs.getInt("codice");
+					bean.setCodice(codiceProdotto);
+					bean.setNome(rs.getString("nome"));
+					bean.setDescrizione(rs.getString("descrizione"));
+					bean.setPrezzo(rs.getDouble("prezzo"));
+					bean.setSpedizione(rs.getDouble("speseSpedizione"));
+					bean.setEmail(rs.getString("emailVenditore"));
+					bean.setTag(rs.getString("tag"));
+					bean.setTipologia(rs.getString("nomeTipologia"));
+					bean.setData(rs.getDate("dataAnnuncio"));
+					bean.setImmagine(rs.getString("model"));
+					
+					connection2 = DriverManagerConnectionPool.getConnection();
+					preparedStatement2 = connection2.prepareStatement(sql2);
+					preparedStatement2.setInt(1, codiceProdotto);
+					ResultSet rs2 = preparedStatement2.executeQuery();
+					if (rs2.next()) {
+						bean.setVotazione(rs2.getDouble(1));
+					}
+					
+					products.add(bean);
 				}
-				
-				products.add(bean);
 			}
+			
 
 		} finally {
 			try {

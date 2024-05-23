@@ -23,10 +23,10 @@ public class DriverManagerConnectionPool {
 	private static Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
 		String db = "GeekFactoryDB";
-		String username = "root";
-		String password = "root";
+		String username = "gsab3";
+		String password = "911MBLSC!a";
 
-		newConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db, username, password);
+		newConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true", username, password);
 		
 		newConnection.setAutoCommit(false);
 		
